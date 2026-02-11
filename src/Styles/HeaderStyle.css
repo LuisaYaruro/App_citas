@@ -1,0 +1,21 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(18, 189, 2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;        /* ancho completo de la pantalla */
+    height: 60px;       /* ajusta a tu diseño */
+    z-index: 1000;      /* para que quede por encima del contenido */
+
+    /* Evitar desbordes */
+    box-sizing: border-box;
+    overflow-x: hidden;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+    align-items: center;
+
+}
