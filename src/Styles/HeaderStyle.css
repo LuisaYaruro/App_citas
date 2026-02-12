@@ -14,6 +14,7 @@
     /* Evitar desbordes */
     box-sizing: border-box;
     overflow-x: hidden;
+    overflow-y: hidden;
     border-bottom: 1px solid #ddd;
     padding: 1rem;
     align-items: center;

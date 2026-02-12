@@ -1,5 +1,5 @@
 import React from 'react'
-import './Styles/HeaderStyle.css'
+import '../Styles/HeaderStyle.css'
 
 const CHeader = () => {
   return (

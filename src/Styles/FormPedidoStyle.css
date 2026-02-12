@@ -1,0 +1,40 @@
+
+thead{
+    justify-content: center;
+    align-items: center;
+
+}
+
+table {
+  width: 90%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 6px; /* ajusta si quieres menos espacio interno */
+}
+
+
+.Title{
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+    background-color: rgb(18, 189, 2);
+
+}
+
+.content{
+    text-align: center;
+    justify-content: center;
+    margin-top: 100px;
+    border-color: rgb(18,198, 2);
+    border-style: solid;
+    border-width: 1.5px;
+    margin: 0;
+}
+/*Quiero que el chebox se vea verde cuando lo selecione*/
+input[type="checkbox"] {
+  accent-color: rgb(18, 189, 2);
+  color: #fff;
+}
