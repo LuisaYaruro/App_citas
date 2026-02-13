@@ -1,0 +1,39 @@
+.FormO {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  --max-width: 500px;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.FormO label {
+  display: block;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.FormO input {
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.FormO input:focus {
+  outline: none;
+  border-color: rgb(18, 189, 2);
+  box-shadow: 0 0 5px rgba(18, 189, 2, 0.3);
+}

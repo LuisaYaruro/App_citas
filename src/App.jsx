@@ -3,6 +3,7 @@ import CHeader from './Components/CHeader'
 import FormDate from './Components/FormDate'
 import './Styles/StyleApp.css'
 import FormPedido from './Components/FormPedido'
+import VerCitas from './Components/VerCitas'
 
 const App = () => {
 
@@ -17,10 +18,12 @@ const App = () => {
   const [nitActual, setNitActual] = useState("");
 
 
+  const [appView, setAppView] = useState('agendar')
+
   return (
     <div className='Container_App'>
 
-      <CHeader />
+      <CHeader onNavigate={setAppView} />
 
 
       <div className='app_Content'>
@@ -85,10 +88,19 @@ const App = () => {
 
         {paso === "app" && (
           <>
-            <h4>¡Bienvenido, usuario!</h4>
-            <p>Agenda la recogida de tu pedido aqui</p>
-            <FormPedido />
-            <FormDate />
+            {appView === 'agendar' && (
+              <>
+                <h4>¡Bienvenido, usuario!</h4>
+                <p>Agenda la recogida de tu pedido aqui</p>
+                <FormPedido />
+                <FormDate />
+              </>
+            )}
+
+            {appView === 'verCitas' && (
+              <VerCitas />
+            )}
+
           </>
         )}
 

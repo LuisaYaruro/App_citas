@@ -1,0 +1,45 @@
+/* Floating Menu Rectangle Styles */
+.menu-container {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    z-index: 1100;
+    min-width: 180px;
+    transform-origin: top right;
+}
+
+.menu-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-container li {
+    margin: 6px 0;
+}
+
+.menu-container a {
+    text-decoration: none;
+    color: #333333;
+    font-weight: 500;
+    font-size: 14px;
+    display: block;
+    padding: 8px 10px;
+    border-radius: 4px;
+    transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.menu-container a:hover {
+    background-color: rgb(124, 210, 124);
+    color: #ffffff;
+}
+
+.menu-container a:target {
+    background-color: rgb(124, 210, 124);
+    color: #ffffff;
+}

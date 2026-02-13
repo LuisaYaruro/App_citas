@@ -1,17 +1,31 @@
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import '../Styles/FormDateStyle.css'
+import { CiCalendarDate } from "react-icons/ci";
+
 
 const FormDate = () => {
   const [fecha, setFecha] = useState(null);
   const [horaSeleccionada, setHoraSeleccionada] = useState(null);
+  const datePickerRef = useRef(null);
 
-  // Array de horas disponibles (8:00 a 15:30 en formato 24h)
+  // Array completo de horas disponibles (8:00 a 15:30 en formato 24h)
   const horas = [
     "08:00", "09:30", "11:00", "12:30", "14:00", "15:30"
   ];
+
+  // Helper: convierte "HH:MM" a minutos desde medianoche
+  const aMinutos = (hhmm) => {
+    const [h, m] = hhmm.split(":").map(Number);
+    return h * 60 + m;
+  };
+
+  // Si es viernes (getDay() === 5) limitar horas hasta 12:30
+  const horasDisponibles = fecha && fecha.getDay() === 5
+    ? horas.filter((h) => aMinutos(h) <= aMinutos("12:30"))
+    : horas;
 
   // Fecha de hoy (solo futuras)
   const hoy = new Date();
@@ -25,23 +39,39 @@ const FormDate = () => {
   return (
     <div className="form-date-container">
       <label>Seleccione una fecha:</label>
-      <DatePicker
-        selected={fecha}
-        onChange={(date) => setFecha(date)}
-        minDate={hoy}
-        filterDate={(date) => !diasDeshabilitados(date)}
-        excludeDates={[]}
-        placeholderText="Seleccione una fecha"
-        dateFormat="dd/MM/yyyy"
-        className="date-picker-input"
-      />
+      <div className="date-input-wrapper">
+        <DatePicker
+          ref={datePickerRef}
+          selected={fecha}
+          onChange={(date) => { setFecha(date); setHoraSeleccionada(null); }}
+          minDate={hoy}
+          filterDate={(date) => !diasDeshabilitados(date)}
+          excludeDates={[]}
+          placeholderText="  / /    "
+          dateFormat="dd/MM/yyyy"
+          className="date-picker-input"
+        />
+        <CiCalendarDate
+          className="calendar-icon"
+          role="button"
+          tabIndex={0}
+          aria-label="Abrir calendario"
+          onClick={() => datePickerRef.current && datePickerRef.current.setOpen(true)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              datePickerRef.current && datePickerRef.current.setOpen(true);
+            }
+          }}
+        />
+      </div>
 
       {/* Mostrar selector de horas solo si se seleccionó una fecha */}
       {fecha && (
         <div className="horas-container">
           <label>Seleccione una hora:</label>
           <div className="horas-grid">
-            {horas.map((hora) => (
+            {horasDisponibles.map((hora) => (
               <button
                 key={hora}
                 className={`hora-btn ${horaSeleccionada === hora ? 'activa' : ''}`}
@@ -58,6 +88,8 @@ const FormDate = () => {
           )}
         </div>
       )}
+      {/*Aqui se pondra el formulario para el operario despues de que se seleccione la fecha y la hora*/}
+      {horaSeleccionada && <button type="submit">Enviar Solicitud</button>}
     </div>
   );
 };

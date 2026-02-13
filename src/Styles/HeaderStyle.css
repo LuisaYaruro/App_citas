@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-between;
     color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgb(18, 189, 2);
+    font-family: poppins, sans-serif;
+    background-color: rgb(124, 210, 124);
     position: fixed;
     top: 0;
     left: 0;
@@ -11,12 +11,28 @@
     height: 60px;       /* ajusta a tu diseño */
     z-index: 1000;      /* para que quede por encima del contenido */
 
-    /* Evitar desbordes */
+    /* Permitir que los elementos desplegables salgan del header */
     box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: visible;
     border-bottom: 1px solid #ddd;
     padding: 1rem;
     align-items: center;
 
+}
+
+.buttoMenu{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.Menu{
+    color: white;
+
+}
+/* posicionar el contenedor del menu relativo al boton */
+.menu-wrapper{
+    position: relative;
+    display: inline-block;
 }
