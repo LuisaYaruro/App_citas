@@ -4,6 +4,8 @@ import FormDate from './Components/FormDate'
 import './Styles/StyleApp.css'
 import FormPedido from './Components/FormPedido'
 import VerCitas from './Components/VerCitas'
+import LoginNit from './Components/LoginNit'
+import VerificarCodigo from './Components/VerificarCodigo'
 
 const App = () => {
 
@@ -33,24 +35,10 @@ const App = () => {
            ============================================================ */}
 
         {paso === "login" && (
-          <div>
-            <h2>Ingreso con NIT</h2>
-
-            <input
-              type="text"
-              placeholder="Ingresa tu NIT"
-              onChange={(e) => setNitActual(e.target.value)}
-            />
-
-            {/* 
-              🔵 SIMULACIÓN:
-              Aquí después irá el fetch real a la API.
-              Por ahora solo cambia el paso.
-            */}
-            <button onClick={() => setPaso("verificar")}>
-              Simular envío de código
-            </button>
-          </div>
+          <LoginNit onCodigoEnviado={(nit) => {
+            setNitActual(nit);
+            setPaso("verificar");
+          }} />
         )}
 
 
@@ -59,26 +47,7 @@ const App = () => {
            ============================================================ */}
 
         {paso === "verificar" && (
-          <div>
-            <h2>Verificación de Código</h2>
-            <p>
-              Se envió un código al correo asociado al NIT: <b>{nitActual}</b>
-            </p>
-
-            <input
-              type="text"
-              placeholder="Ingresa el código"
-            />
-
-            {/* 
-              🔵 SIMULACIÓN:
-              En el futuro aquí se validará contra la API.
-              Por ahora entra directamente a la app.
-            */}
-            <button onClick={() => setPaso("app")}>
-              Simular verificación correcta
-            </button>
-          </div>
+          <VerificarCodigo nit={nitActual} onLoginExitoso={() => setPaso('app')} />
         )}
 
 

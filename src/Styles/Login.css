@@ -1,0 +1,67 @@
+.loginNit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+.loginNit-container h2 {
+    text-align: center;
+    color: #333;
+    font-family: poppins, sans-serif;
+}
+
+.nitInput {
+    padding: 12px;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: poppins, sans-serif;
+    transition: border-color 0.3s;
+}
+
+.nitInput:focus {
+    outline: none;
+    border-color: rgb(124, 210, 124);
+    box-shadow: 0 0 5px rgb(124, 210, 124, 0.5);
+}
+
+/* Estilos específicos para el campo de código: centrado y espaciado tipo "XXX - XXX" */
+.nitInput.codeInput {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.4rem;
+    font-size: 1.05rem;
+    padding: 14px;
+}
+
+.nitInput.codeInput::placeholder {
+    letter-spacing: 0.4rem;
+    color: #999;
+}
+
+.loginNit-container .button {
+    padding: 12px;
+    background-color: rgb(124, 210, 124);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: poppins, sans-serif;
+    transition: background-color 0.3s;
+}
+
+.loginNit-container .button:hover:not(:disabled) {
+    background-color: rgb(124, 210, 124);
+}
+
+.loginNit-container .button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

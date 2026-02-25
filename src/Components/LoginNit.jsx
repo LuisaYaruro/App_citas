@@ -1,5 +1,6 @@
 // LoginNit.jsx
 import { useState } from "react";
+import '../Styles/Login.css'
 
 function LoginNit({ onCodigoEnviado }) {
   const [nit, setNit] = useState("");
@@ -16,17 +17,17 @@ function LoginNit({ onCodigoEnviado }) {
   };
 
   return (
-    <div>
+    <div className="loginNit-container">
       <h2>Ingreso con NIT</h2>
 
-      <input
+      <input className="nitInput"
         type="text"
         placeholder="Ingresa tu NIT"
         value={nit}
         onChange={(e) => setNit(e.target.value)}
       />
 
-      <button onClick={enviarCodigo} disabled={!nit || loading}>
+      <button className="button" onClick={enviarCodigo} disabled={!nit || loading}>
         {loading ? "Enviando..." : "Enviar código"}
       </button>
     </div>

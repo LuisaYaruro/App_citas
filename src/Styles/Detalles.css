@@ -1,0 +1,59 @@
+.detalles-pedido {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(124, 210, 124);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 300px;
+  max-width: 500px;
+  z-index: 1000;
+}
+
+.detalles-pedido h2 {
+  color: white;
+  margin-top: 0;
+}
+
+.detalles-pedido p {
+  color: white;
+}
+
+.detalles-pedido table {
+  width: 100%;
+  background-color: white;
+  border-collapse: collapse;
+  margin: 15px 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.detalles-pedido th,
+.detalles-pedido td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.detalles-pedido th {
+  background-color: #4a9f4a;
+  color: white;
+}
+
+.detalles-pedido button {
+  background-color: rgb(124, 210, 124);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.detalles-pedido button:hover {
+  background-color: white;
+  color: rgb(124, 210, 124);
+}
