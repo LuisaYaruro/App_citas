@@ -1,36 +1,56 @@
-/* Contenedor responsivo: permite scroll horizontal en pantallas pequeñas */
-.table-container{
-  width: 100%;
-  overflow-x: auto;
-  box-sizing: content-box;
-  padding: 5px;
+h1{
+    text-align: center;
+    color: rgb(124, 210, 124);
+    margin-top: 20px;
 }
 
-table {
-  width: 100%;
-  max-width: 100%;
-  border-spacing: 0;
-  table-layout: auto;
+
+strong{
+    color: rgb(65, 127, 65);
 }
 
-th, td {
-  padding: 8px 6px;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid rgba(124,210,124,0.15);
-  font-size: 0.75rem;
-  word-break: break-word;
+.cardcita{
+    background-color: rgb(217, 251, 217);
+    border: 3px solid rgb(124, 210, 124);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    color: #383838;
 }
 
-.title{
-  font-size: 0.75rem;
-  color: #fff;
-  background-color: rgb(124, 210, 124);
+.assign-btn{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(124, 210, 124);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: poppins, sans-serif;
+    transition: background-color 0.3s;
 }
 
-.content{
-  text-align: center;
-  padding: 6px;
-  margin: 0;
+.review-btn{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(124, 210, 124);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: poppins, sans-serif;
+    transition: background-color 0.3s;
 }
 
+.assign-btn:hover:not(:disabled),
+.review-btn:hover:not(:disabled) {
+    background-color: rgb(124, 210, 124);
+}

@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import '../Styles/FormDateStyle.css'
 import { CiCalendarDate } from "react-icons/ci";
+import FormOperario from './FormOperario';
 
 
 const FormDate = () => {
@@ -88,8 +89,22 @@ const FormDate = () => {
           )}
         </div>
       )}
-      {/*Aqui se pondra el formulario para el operario despues de que se seleccione la fecha y la hora*/}
-      {horaSeleccionada && <button type="submit">Enviar Solicitud</button>}
+      
+      {/* Mostrar formulario de operario cuando se seleccione fecha y hora */}
+      {horaSeleccionada && (
+        <div className="operario-container">
+          <h4>Datos del Conductor (Opcional)</h4>
+          <FormOperario 
+            onGuardar={(docConductor, matricula) => {
+              console.log('Operario guardado:', { docConductor, matricula, fecha: fecha.toLocaleDateString('es-ES'), hora: horaSeleccionada });
+            }}
+            onCancelar={() => {}}
+            opcional={true}
+          />
+        </div>
+      )}
+      
+      {horaSeleccionada && <button type="submit" className="submit-button">Enviar Solicitud</button>}
     </div>
   );
 };

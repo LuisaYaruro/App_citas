@@ -7,12 +7,21 @@ const VerCitas = () => {
   const [citas, setCitas] = useState(CitasMock)
   const [citaSeleccionada, setCitaSeleccionada] = useState(null)
   const [mostrarFormulario, setMostrarFormulario] = useState(false)
+  const [mostrarRevision, setMostrarRevision] = useState(false)
 
   const handleSeleccionarCita = (cita) => {
-    if (cita.estado === 'Aprobada') {
-      setCitaSeleccionada(cita)
-      setMostrarFormulario(true)
-    }
+    // abrir el detalle (no usado ahora)
+    setCitaSeleccionada(cita)
+  }
+
+  const handleAsignar = (cita) => {
+    setCitaSeleccionada(cita)
+    setMostrarFormulario(true)
+  }
+
+  const handleRevisar = (cita) => {
+    setCitaSeleccionada(cita)
+    setMostrarRevision(true)
   }
 
   const handleGuardarOperario = (docConductor, matricula) => {
@@ -28,76 +37,66 @@ const VerCitas = () => {
 
   return (
     <div>
-      <h3>Ver Citas</h3>
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th className='title' >ID</th>
-                <th className='title' >Paciente</th>
-                <th className='title' >Fecha</th>
-                <th className='title' >Hora</th>
-                <th className='title' >Conductor</th>
-                <th className='title' >Placa</th>
-                <th className='title' >Estado</th>
-                <th className='title' >Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {citas.map((cita) => (
-                <tr key={cita.id}>
-                  <td className='content' data-label="ID">{cita.id}</td>
-                  <td className='content' data-label="Paciente">{cita.cliente}</td>
-                  <td className='content' data-label="Fecha">{cita.fecha}</td>
-                  <td className='content' data-label="Hora">{cita.hora}</td>
-                  <td className='content' data-label="Conductor">{cita.conductor || 'No asignado'}</td>
-                  <td className='content' data-label="Placa">{cita.placa || 'No asignada'}</td>
-                  <td className='content' data-label="Estado">{cita.estado}</td>
-                  <td className='content' data-label="Acción">
-                    {cita.estado === 'Aprobada' && !cita.conductor && (
-                      <button 
-                        onClick={() => handleSeleccionarCita(cita)}
-                        style={{
-                          padding: '4px 8px',
-                          backgroundColor: 'rgb(124, 210, 124)',
-                          color: '#fff',
-                          border: 'none',
-                          borderRadius: '4px',
-                          cursor: 'pointer',
-                          fontSize: '0.75rem'
-                        }}
-                      >
-                        Asignar
-                      </button>
-                    )}
-                    {cita.conductor && (
-                      <span style={{ color: 'green', fontSize: '0.75rem' }}>✓ Asignado</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <h1>Mis Citas</h1>
+      <div className='listcitas'>
+        {citas.map((cita) => (
+          <div key={cita.id} className={`cardcita ${cita.estado.toLowerCase()}`}>
+            <h3><strong className='titlePedido'>Pedido:</strong> {cita.id}</h3>
+            <p><strong>Cliente:</strong> {cita.cliente}</p>
+            <p><strong>Dirección:</strong> {cita.direccion}</p>
+            <p><strong>Ciudad:</strong> {cita.ciudad}</p>
+            <p><strong>Fecha:</strong> {cita.fecha}</p>
+            <p><strong>Hora:</strong> {cita.hora}</p>
+            <p><strong>Estado:</strong> {cita.estado}</p>
+            <p><strong>Conductor:</strong> {cita.conductor || 'No asignado'}</p>
+            <p><strong>Placa:</strong> {cita.placa || 'No asignada'}</p>
 
-        {mostrarFormulario && citaSeleccionada && (
-          <div style={{
-            marginTop: '20px',
-            padding: '15px',
-            border: '1px solid rgb(124, 210, 124)',
-            borderRadius: '6px',
-            backgroundColor: '#f9f9f9'
-          }}>
-            <h4>Asignar Conductor para Cita #{citaSeleccionada.id}</h4>
-            <FormOperario 
-              onGuardar={handleGuardarOperario}
-              onCancelar={() => {
-                setMostrarFormulario(false)
-                setCitaSeleccionada(null)
-              }}
-            />
+            {cita.estado === 'Aprobada' && !cita.conductor && (
+              <button className="assign-btn" onClick={() => handleAsignar(cita)}>Asignar Conductor</button>
+            )}
+
+            {cita.conductor && cita.placa && (
+              <span className="assigned-indicator">✓ Asignado</span>
+            )}
+
+            {cita.estado === 'Rechazado' && (
+              <button className="review-btn" onClick={() => handleRevisar(cita)}>Revisar propuesta</button>
+            )}
           </div>
-        )}
+        ))}
+      </div>
+
+      {mostrarFormulario && citaSeleccionada && (
+        <div className="modal-container">
+          <h4>Asignar Conductor para Cita #{citaSeleccionada.id}</h4>
+          <FormOperario 
+            onGuardar={(docConductor, matricula) => {
+              const citasActualizadas = citas.map((c) => 
+                c.id === citaSeleccionada.id ? { ...c, conductor: docConductor, placa: matricula } : c
+              )
+              setCitas(citasActualizadas)
+              setMostrarFormulario(false)
+              setCitaSeleccionada(null)
+            }}
+            onCancelar={() => {
+              setMostrarFormulario(false)
+              setCitaSeleccionada(null)
+            }}
+            opcional={false}
+          />
+        </div>
+      )}
+
+      {mostrarRevision && citaSeleccionada && (
+        <div className="modal-container">
+          <h4>Revisar propuesta - Cita #{citaSeleccionada.id}</h4>
+          <p><strong>Cliente:</strong> {citaSeleccionada.cliente}</p>
+          <p><strong>Detalles:</strong> {citaSeleccionada.direccion}, {citaSeleccionada.ciudad}</p>
+          <div style={{ marginTop: 12 }}>
+            <button className="cancelar" onClick={() => { setMostrarRevision(false); setCitaSeleccionada(null); }}>Cerrar</button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

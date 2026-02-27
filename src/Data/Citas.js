@@ -6,7 +6,7 @@ export const CitasMock = [
         hora: "10:00",
         conductor: null,
         placa: null,
-        estado: "Pendiente"
+        estado: "Rechazado"
     },
     {
         id: 2, 

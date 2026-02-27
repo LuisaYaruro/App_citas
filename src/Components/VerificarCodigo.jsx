@@ -42,7 +42,7 @@ function VerificarCodigo({ nit, onLoginExitoso }) {
 
       <button className="button" onClick={verificar}>Verificar</button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import '../Styles/FormOperarioStyle.css'
 
-const FormOperario = ({ onGuardar, onCancelar }) => {
+const FormOperario = ({ onGuardar, onCancelar, opcional = false }) => {
   const [docConductor, setDocConductor] = useState('')
   const [matricula, setMatricula] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (docConductor.trim() && matricula.trim()) {
+    if (opcional || (docConductor.trim() && matricula.trim())) {
       onGuardar(docConductor, matricula)
       setDocConductor('')
       setMatricula('')
@@ -42,34 +42,11 @@ const FormOperario = ({ onGuardar, onCancelar }) => {
                 required
               />
 
-              <div style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
-                <button className='guardar'
-                  type="submit"
-                  style={{
-                    padding: '8px 16px',
-                    backgroundColor: 'rgb(124, 210, 124)',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontSize: '0.9rem'
-                  }}
-                >
+              <div className="form-buttons">
+                <button className="guardar" type="submit">
                   Guardar
                 </button>
-                <button 
-                  type="button"
-                  onClick={onCancelar}
-                  style={{
-                    padding: '8px 16px',
-                    backgroundColor: '#ccc',
-                    color: '#333',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontSize: '0.9rem'
-                  }}
-                >
+                <button className="cancelar" type="button" onClick={onCancelar}>
                   Cancelar
                 </button>
               </div>
